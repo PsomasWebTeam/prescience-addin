@@ -1,0 +1,58 @@
+/* Psomas palette (Style Guide V4.1): Pacific Blue anchors, California Poppy accents */
+:root {
+  --navy: #0C3350; --navy-hover: #174A73; --poppy: #EA7B24; --anon: #8D9DA6; --sky: #E3E9EA;
+  --bg: #F4F6F8; --card: #FFFFFF; --border: #D5DDE0; --panel: #EEF2F4; --text: #1B2A36; --muted: #5C6B76;
+  --ok-bg: #E1F1EF; --ok-tx: #00695F; --warn-bg: #FFF4D6; --warn-tx: #8A5A00; --err-bg: #FBE4E4; --err-tx: #B3261E;
+  --info-bg: #E3EDF8;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
+  font-family: "Segoe UI", Aptos, Arial, sans-serif; font-size: 13px; }
+.band { background: var(--navy); color: #fff; padding: 10px 14px; display: flex; align-items: center; gap: 8px; }
+.wordmark { font-weight: 700; font-size: 16px; letter-spacing: .5px; }
+.wordmark .by { font-weight: 400; font-size: 11px; color: #B9C7D1; margin-left: 6px; letter-spacing: 0; }
+.accent { height: 3px; background: var(--poppy); }
+main { padding: 10px 12px 60px; }
+footer { position: fixed; left: 0; right: 0; bottom: 0; background: var(--card); border-top: 1px solid var(--border);
+  padding: 8px 12px; font-size: 12px; color: var(--muted); }
+footer a { color: var(--navy); text-decoration: none; font-weight: 600; }
+.hidden { display: none !important; }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; margin-bottom: 10px; }
+.cardhead { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+h2 { margin: 0 0 6px; font-size: 11px; letter-spacing: .6px; text-transform: uppercase; color: var(--anon); font-weight: 700; }
+h3 { margin: 4px 0 4px; font-size: 15px; color: var(--navy); }
+p { margin: 6px 0; }
+.muted { color: var(--muted); }
+.small { font-size: 12px; }
+.subject { font-size: 14px; font-weight: 700; line-height: 1.3; margin: 2px 0 4px; }
+.summary { font-size: 13px; line-height: 1.35; margin: 4px 0; }
+.status { border-radius: 8px; padding: 8px 10px; margin-bottom: 10px; font-size: 12.5px; border: 1px solid var(--border); background: var(--panel); }
+.status.ok { background: var(--ok-bg); color: var(--ok-tx); border-color: transparent; }
+.status.warn { background: var(--warn-bg); color: var(--warn-tx); border-color: transparent; }
+.status.err { background: var(--err-bg); color: var(--err-tx); border-color: transparent; }
+.status.busy::before { content: ""; display: inline-block; width: 11px; height: 11px; border: 2px solid var(--navy); border-right-color: transparent;
+  border-radius: 50%; margin-right: 8px; vertical-align: -2px; animation: spin .9s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.pill { display: inline-block; padding: 2px 9px; border-radius: 10px; font-size: 11px; font-weight: 700; }
+.pill.info { background: var(--info-bg); color: var(--navy); }
+.pill.neutral { background: var(--sky); color: var(--muted); }
+.field { display: block; margin: 8px 0; }
+.field > span { display: block; font-weight: 700; color: var(--navy); font-size: 12.5px; margin-bottom: 3px; }
+input[type=url], input[type=text] { width: 100%; border: 1px solid var(--border); border-radius: 6px; padding: 7px 8px; font: inherit; color: var(--text); background: #fff; }
+input:focus { outline: 2px solid #3D7CB8; outline-offset: 0; border-color: transparent; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; align-items: center; }
+button { font: inherit; font-weight: 600; border-radius: 6px; padding: 8px 12px; cursor: pointer; border: 1px solid var(--border);
+  background: #fff; color: var(--text); }
+button.primary { background: var(--navy); color: #fff; border-color: var(--navy); }
+button.primary:hover { background: var(--navy-hover); }
+button.secondary:hover { background: var(--sky); }
+button.wide { width: 100%; margin-top: 8px; padding: 10px 12px; }
+button.mini { padding: 5px 10px; font-size: 12px; }
+button:disabled { opacity: .55; cursor: default; }
+.choice { text-align: center; padding: 14px 12px; }
+.glyph { font-size: 30px; color: var(--anon); line-height: 1; }
+.glyph.poppy { color: var(--poppy); }
+.att { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--panel); }
+.att:last-child { border-bottom: none; }
+.att .name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12.5px; }
+.att .size { color: var(--muted); font-size: 11.5px; }
