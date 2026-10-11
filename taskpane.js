@@ -18,7 +18,7 @@
 */
 (function () {
   "use strict";
-  const VERSION = "1.0";
+  const VERSION = "1.1";
   const $ = (id) => document.getElementById(id);
   const DOC_EXTS = [".pdf", ".docx", ".doc", ".rtf"];
   const state = { flowUrl: "", user: { name: "", email: "" }, email: null, busy: false, has18: false, has114: false };
@@ -152,7 +152,7 @@
         action, name, messageId: e.restId, attachmentId: att ? restAttachmentId(att.id) : "", contentBase64: content }), 115000);
       setStatus("", "");
       $("res-text").textContent = `${name} is on its way to Prescience's ${action === "upload" ? "Upload" : "Compare"} box.`;
-      $("res-note").textContent = `It appears there within a minute or two — Prescience must be open on your PC, signed in as ${state.user.email}.`
+      $("res-note").textContent = `Prescience picks it up within a few minutes, or at once when you switch to its window — it must be open on your PC, signed in as ${state.user.email}.`
         + (res.via === "mailbox" ? " (The flow fetched it from your mailbox.)" : "");
       page("result");
     } catch (err) {
@@ -193,7 +193,12 @@
     try { state.has18 = Office.context.requirements.isSetSupported("Mailbox", "1.8"); } catch (e) { state.has18 = false; }
     try { state.has114 = Office.context.requirements.isSetSupported("Mailbox", "1.14"); } catch (e) { state.has114 = false; }
     try { const p = Office.context.mailbox.userProfile; state.user = { name: p.displayName || "", email: (p.emailAddress || "").toLowerCase() }; } catch (e) { state.user = { name: "", email: "" }; }
-    state.flowUrl = roam("prescienceFlowUrl") || "";
+    // v3.4: the manifest IT deploys carries the flow address (taskpane.html?flow=...), so nobody types it;
+    // a person who added the button themselves pastes it once and it stays in their roaming settings
+    let fromManifest = "";
+    try { fromManifest = (new URLSearchParams(location.search).get("flow") || "").trim(); } catch (e) { fromManifest = ""; }
+    if (/^https:\/\//i.test(fromManifest)) { state.flowUrl = fromManifest; if (roam("prescienceFlowUrl") !== fromManifest) roam("prescienceFlowUrl", fromManifest); }
+    else state.flowUrl = roam("prescienceFlowUrl") || "";
     state.email = readItem(); renderEmail();
     try { Office.context.mailbox.addHandlerAsync(Office.EventType.ItemChanged, () => { state.email = readItem(); renderEmail(); if (!$("sec-settings").classList.contains("hidden") || !$("sec-setup").classList.contains("hidden")) return; page("main"); }); } catch (e) { /* pinning not supported here */ }
     page(state.flowUrl ? "main" : "setup");
