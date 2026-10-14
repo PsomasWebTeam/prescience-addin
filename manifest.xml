@@ -5,7 +5,7 @@
            xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0"
            xsi:type="MailApp">
   <Id>3f6c0e2a-9b1d-4c7e-8a5f-2d4b6c8e0a13</Id>
-  <Version>1.1.0.0</Version>
+  <Version>2.0.0.0</Version>
   <ProviderName>Psomas</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="Prescience by Psomas"/>
